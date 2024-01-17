@@ -1,19 +1,19 @@
-import {useContext, useRef, useState} from "react";
+import {useContext, useState} from "react";
 import {LoginContext} from "../context/LoginContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Login = ()=> {
 
 	const [enteredName, setEnteredName] = useState('');
-	const { setUsers } = useContext(LoginContext);
-	const userIdRef = useRef(1);
+	const { setUser } = useContext(LoginContext);
+	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const newUser = { id: userIdRef.current, name: enteredName };
-		setUsers(prevUsers => [...prevUsers, newUser]);
-		userIdRef.current++;
+		setUser(enteredName);
 		console.log(`New user added: ${enteredName}`);
 		setEnteredName('');
+		navigate('/menu');
 	};
 
 	return (
