@@ -6,11 +6,11 @@ LoginContext.displayName = "LoginContext"
 
 const LoginInfoContext = ({ children })=> {
 
-    const [users, setUsers] = useState([]);
+    const [user, setUser] = useState('');
 
 
     return (
-        <LoginContext.Provider value={{users, setUsers}}>
+        <LoginContext.Provider value={{user, setUser}}>
             {children}
         </LoginContext.Provider>
     )
