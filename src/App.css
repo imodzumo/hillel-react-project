@@ -147,3 +147,44 @@
     grid-column: 3;
     align-self: end;
 }
+
+/*Counter*/
+.counter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.buttons-container {
+    display: flex;
+}
+.counter-display {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+.counter-button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1em;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+.increment {
+    background-color: darkgreen;
+}
+.decrement {
+    background-color: darkred;
+}
+.counter-button.increment:hover {
+    background-color: forestgreen;
+}
+.counter-button.decrement:hover {
+    background-color: red;
+}
+.counter-button:active {
+    transform: scale(0.98);
+}
