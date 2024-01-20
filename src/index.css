@@ -42,6 +42,7 @@ body {
 .link {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 .link:hover {
   color: inherit;

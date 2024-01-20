@@ -1,16 +1,16 @@
-import {useContext, useState} from "react";
-import {LoginContext} from "../context/LoginContext.jsx";
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {authUser} from "../redux/slices/userSlice.js";
 
 const Login = ()=> {
-
 	const [enteredName, setEnteredName] = useState('');
-	const { setUser } = useContext(LoginContext);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setUser(enteredName);
+		dispatch(authUser(enteredName));
 		console.log(`New user added: ${enteredName}`);
 		setEnteredName('');
 		navigate('/menu');
