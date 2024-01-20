@@ -28,6 +28,12 @@
         max-width: 150px;
     }
 }
+.header-wrapper-cart {
+    display: flex;
+}
+.header-wrapper-cart-user {
+    margin-right: 20px;
+}
 
 /*Login*/
 .login-container {
@@ -66,7 +72,8 @@
 .submit-button {
     padding: 8px 16px;
     border: 1px solid lightgrey;
-    border-radius: 5px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 .submit-button:hover {
     opacity: 0.8;
@@ -148,43 +155,76 @@
     align-self: end;
 }
 
-/*Counter*/
-.counter-container {
+/*Cart*/
+.cart-main {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.cart-container {
+    display: grid;
     justify-content: center;
-    margin-top: 50px;
+    align-self: center;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    margin: 0 auto;
+    padding: 20px 0;
 }
-.buttons-container {
+.arrow-left {
+    transform: rotate(180deg);
+    display: inline-block;
+}
+.back-to-menu-button {
+
+}
+.cart-title {
+    font-weight: lighter;
+    color: darkslategrey;
+}
+.cart-item-container{
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 4fr 2fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid darkgrey;
+}
+.cart-item-wrapper {
     display: flex;
+    align-items: center;
 }
-.counter-display {
-    font-size: 2em;
-    margin-bottom: 20px;
+.cart-item-wrapper-quantity, .cart-item-wrapper-name {
+    color: grey;
+    font-weight: lighter;
+    margin-right: 10px;
 }
-.counter-button {
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 1em;
-    color: white;
+.cart-item-price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-item-price-wrapper {
+    color: darkslategrey;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.cart-item-quantity-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.button-quantity {
+    background-color: #eab308;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-}
-.increment {
-    background-color: darkgreen;
-}
-.decrement {
-    background-color: darkred;
-}
-.counter-button.increment:hover {
-    background-color: forestgreen;
-}
-.counter-button.decrement:hover {
-    background-color: red;
-}
-.counter-button:active {
-    transform: scale(0.98);
+    border-radius: 10px;
+    color: #000;
+    font-weight: bold;
+    width: 35px;
+    height: 30px;
+    margin: 0 10px;
 }

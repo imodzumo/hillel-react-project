@@ -1,6 +1,6 @@
 import MenuItem from "../components/MenuItem.jsx";
 import {useEffect, useState} from "react";
-import {PIZZA_API} from "../../constants.js";
+import {PIZZA_API} from "../constants.js";
 
 const Menu = ()=> {
 

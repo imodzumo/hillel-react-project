@@ -1,10 +1,13 @@
+import {useDispatch} from "react-redux";
+import {addToCart} from "../redux/slices/cartSlice.js";
 
 const MenuItem = ({ item }) => {
 
 	const { name, unitPrice, imageUrl, ingredients, soldOut } = item;
 
+	const dispatch = useDispatch();
 	const handleAddToCart = ()=> {
-		//TO DO - add handleAddToCart functionality
+		dispatch(addToCart(item));
 	}
 
 	const capitalize = (s) => {
