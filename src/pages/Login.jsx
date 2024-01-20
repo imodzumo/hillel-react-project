@@ -30,7 +30,7 @@ const Login = ()=> {
 					onChange={(e) => setEnteredName(e.target.value)}
 					placeholder="Your full name"
 				/>
-				<button type="submit" className="submit-button main-orange-background-color">Submit</button>
+				<button type="submit" className="buttons submit-button main-orange-background-color">Submit</button>
 			</form>
 		</div>
 	);

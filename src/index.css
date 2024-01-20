@@ -50,3 +50,17 @@ body {
 .uppercase {
   text-transform: uppercase;
 }
+.buttons {
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, box-shadow 0.2s, transform 0.2s;
+}
+.buttons:hover {
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.buttons:active {
+
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}

@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 const Header = ()=> {
 	const navigate = useNavigate();
 	const user = useSelector(state => state.user.user);
+	const cartItems = useSelector(state => state.cart.items);
 
 	return (
 		<div>
@@ -16,7 +17,8 @@ const Header = ()=> {
 						src="../../public/icon-cart.svg"
 						alt="cart"
 						onClick={()=> navigate("/cart")}
-						className="link"/>
+						className="cart-icon link"/>
+					{cartItems.length > 0 && <span className="cart-icon-quantity">{cartItems.length}</span>}
 				</div>
 			</div>
 		</div>

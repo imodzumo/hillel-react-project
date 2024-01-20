@@ -1,9 +1,10 @@
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteFromCart, decrementQty, incrementQty, clearCart} from "../redux/slices/cartSlice.js";
 
 const Cart = ()=> {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const items = useSelector(state => state.cart.items);
 
 	const handelOrderPizzas = ()=> {
@@ -12,10 +13,10 @@ const Cart = ()=> {
 
 	return (
 		<div className="cart-container">
-			<Link to="/menu" className="font-roboto back-to-menu-button">
+			<div onClick={()=> navigate("/menu")} className="font-roboto back-to-menu-button">
 				<span className="arrow-left">&#8594;</span>
 				<span> Back to menu</span>
-			</Link>
+			</div>
 
 			<h1 className="cart-title font-roboto">Your cart, name</h1>
 
@@ -34,18 +35,18 @@ const Cart = ()=> {
 						<div className="cart-item-quantity-wrapper">
 							<button
 								onClick={()=> dispatch(decrementQty(item))}
-								className="button-quantity"
+								className="buttons button-quantity"
 							>-</button>
 							<div>{item.quantity}</div>
 							<button
 								onClick={()=> dispatch(incrementQty(item))}
-								className="button-quantity"
+								className="buttons button-quantity"
 							>+</button>
 						</div>
 
 						<button
 							onClick={()=> dispatch(deleteFromCart(item))}
-							className="submit-button main-orange-background-color font-roboto uppercase"
+							className="buttons submit-button main-orange-background-color font-roboto uppercase"
 						>Delete</button>
 					</div>
 				</div>
@@ -54,11 +55,11 @@ const Cart = ()=> {
 			<div className="cart-buttons-container">
 				<button
 					onClick={handelOrderPizzas}
-					className="order-button font-roboto uppercase"
+					className="buttons order-button font-roboto uppercase"
 				>Order pizzas</button>
 				<button
 					onClick={()=> dispatch(clearCart([]))}
-					className="clear-button font-roboto uppercase"
+					className="buttons clear-button font-roboto uppercase"
 				>Clear cart</button>
 			</div>
 		</div>

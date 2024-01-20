@@ -37,7 +37,7 @@ const MenuItem = ({ item }) => {
 
 			<button
 				onClick={handleAddToCart}
-				className={`add-to-cart-button main-orange-background-color font-roboto ${soldOut ? 'hidden' : ''}`}>
+				className={`add-to-cart-button main-orange-background-color font-roboto buttons ${soldOut ? 'hidden' : ''}`}>
 				Add to cart
 			</button>
 		</div>
