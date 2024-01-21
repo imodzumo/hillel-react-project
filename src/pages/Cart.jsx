@@ -6,6 +6,7 @@ const Cart = ()=> {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const items = useSelector(state => state.cart.items);
+	const user = useSelector(state => state.user.user);
 
 	const handelOrderPizzas = ()=> {
 		console.log("order pizzas");
@@ -18,7 +19,7 @@ const Cart = ()=> {
 				<span> Back to menu</span>
 			</div>
 
-			<h1 className="cart-title font-roboto">Your cart, name</h1>
+			{user && <h1 className="cart-title font-roboto">Your cart, {user}</h1>}
 
 			{items.map(item =>
 				<div className="cart-item-container" key={item.id}>
