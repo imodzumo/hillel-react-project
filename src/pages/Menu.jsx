@@ -1,38 +1,23 @@
 import MenuItem from "../components/MenuItem.jsx";
-import {useEffect, useState} from "react";
-import {PIZZA_API} from "../constants.js";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getMenuItems} from "../redux/slices/cartSlice.js";
 
 const Menu = ()=> {
-
-	const [menu, setMenu] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+	const dispatch = useDispatch();
+	const {isLoading, isError, menuItems} = useSelector(state => state.cart)
 
 	useEffect(()=> {
-		const getMenu = async ()=> {
-			try {
-				const res = await fetch(`${PIZZA_API}/menu`);
-				if (!res.ok) {
-					throw new Error('Failed to fetch menu');
-				}
-				const {data} = await res.json();
-				setMenu(data);
-			} catch (error) {
-				console.error(error.message);
-			} finally {
-				setIsLoading(false);
-			}
-
-		}
-		getMenu();
-	}, [])
+		dispatch(getMenuItems());
+	}, [dispatch])
 
 	if (isLoading) return <div className="menu-container">Loading menu...</div>;
-	if (menu.length === 0) return <div className="menu-container">No menu items available.</div>;
+	if (isError) return <div className="menu-container">No menu items available.</div>;
 
 	return (
 		<div>
 			<div className="menu-container">
-				{menu.map(item => <MenuItem key={item.id} item={item} />)}
+				{menuItems.map(item => <MenuItem key={item.id} item={item} />)}
 			</div>
 		</div>
 	);
