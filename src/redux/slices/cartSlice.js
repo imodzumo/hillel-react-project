@@ -6,6 +6,7 @@ const initialState = {
 	menuItems: [],
 	isLoading: false,
 	isError: false,
+	totalPrice: 0
 }
 
 export const getMenuItems = createAsyncThunk('cart/getMenuItems', async ()=> {
@@ -21,6 +22,10 @@ export const getMenuItems = createAsyncThunk('cart/getMenuItems', async ()=> {
 	}
 })
 
+const calculateTotalPrice = (items) => {
+	return items.reduce((total, item) => total + (item.unitPrice * item.quantity), 0);
+};
+
 const cartSlice = createSlice({
 	name: "cart",
 	initialState,
@@ -32,13 +37,16 @@ const cartSlice = createSlice({
 			} else {
 				state.items.push({...payload, quantity: 1});
 			}
+			state.totalPrice = calculateTotalPrice(state.items);
 		},
 		deleteFromCart: (state, {payload})=> {
 			state.items = state.items.filter(item => item.id !== payload.id)
+			state.totalPrice = calculateTotalPrice(state.items);
 		},
 		incrementQty: (state, {payload}) => {
 			const item = state.items.find(item => item.id === payload.id);
 			++item.quantity;
+			state.totalPrice = calculateTotalPrice(state.items);
 		},
 		decrementQty: (state, {payload}) => {
 			const item = state.items.find(item => item.id === payload.id);
@@ -46,10 +54,15 @@ const cartSlice = createSlice({
 				state.items = state.items.filter(item => item.id !== payload.id)
 			}
 			--item.quantity;
+			state.totalPrice = calculateTotalPrice(state.items);
 		},
 		clearCart: (state, {payload}) => {
 			state.items = payload
-		}
+			state.totalPrice = calculateTotalPrice(state.items);
+		},
+		updateTotalPrice: (state, action) => {
+			state.totalPrice = action.payload;
+		},
 	},
 	extraReducers: (builder)=> {
 		builder.addCase(getMenuItems.pending, (state, action) => {
@@ -72,6 +85,7 @@ export const {
 	deleteFromCart,
 	decrementQty,
 	incrementQty,
-	clearCart
+	clearCart,
+	updateTotalPrice
 } = cartSlice.actions;
 export default cartSlice.reducer;

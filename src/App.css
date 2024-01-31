@@ -240,7 +240,7 @@
     padding-top: 30px;
     align-self: start;
 }
-.order-button {
+.cart-order-button {
     color: darkslategrey;
     font-weight: bold;
     background-color: #eab308;
@@ -292,7 +292,21 @@
     font-weight: lighter;
     margin-right: 10px;
 }
-
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    color: darkslategrey;
+    font-weight: bold;
+}
+.order-button {
+    color: darkslategrey;
+    font-weight: bold;
+    background-color: #eab308;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
 
 /*Input*/
 .input-component {
@@ -303,4 +317,9 @@
     outline: none;
     opacity: 0.8;
     width: 100%;
+}
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }

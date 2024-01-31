@@ -52,7 +52,7 @@ const Cart = ()=> {
 			<div className="cart-buttons-container">
 				<button
 					onClick={()=> navigate("/order/new")}
-					className="buttons order-button font-roboto uppercase"
+					className="buttons cart-order-button font-roboto uppercase"
 				>Order pizzas</button>
 				<button
 					onClick={()=> dispatch(clearCart([]))}

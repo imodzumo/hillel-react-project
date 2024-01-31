@@ -2,14 +2,17 @@ import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {validationSchema} from "../validationSchema.js";
 import Input from "../components/Input.jsx";
-import {useSelector} from "react-redux";
-
+import {useSelector, useDispatch} from "react-redux";
+import {updateTotalPrice} from "../redux/slices/cartSlice.js";
 
 
 const NewOrder = () => {
+	const dispatch = useDispatch();
 	const user = useSelector(state => state.user.user);
+	const currentTotalPrice = useSelector(state => state.cart.totalPrice);
 
-	const {register, handleSubmit, formState: { errors }, reset, control} = useForm({
+
+	const {handleSubmit, formState: { errors }, control} = useForm({
 		defaultValues: {
 			name: user,
 			phone: "+380",
@@ -18,10 +21,15 @@ const NewOrder = () => {
 		resolver: yupResolver(validationSchema),
 	});
 
-	const onSubmit = (data) => {
-		console.log(data);
-	}
+	const handlePriorityChange = (isPriority) => {
+		const updatedPrice = isPriority ? currentTotalPrice + 8 : currentTotalPrice - 8;
 
+		dispatch(updateTotalPrice(updatedPrice));
+	};
+
+	const onSubmit = (data) => {
+		console.log(data, currentTotalPrice);
+	}
 
 	return (
 		<div className="new-order-container">
@@ -52,8 +60,25 @@ const NewOrder = () => {
 					render={({field, fieldState: {error}}) => <Input {...field} error={error} placeholder="address" type="text"/>}
 				/>
 
+				<div></div>
+				<div className="checkbox-container">
+					<Controller
+						name="priority"
+						control={control}
+						render={({field, fieldState: {error}}) =>
+							<Input
+								{...field}
+								error={error}
+								placeholder="priority"
+								type="checkbox"
+								onChange={(e) => handlePriorityChange(e.target.checked)}
+							/>}
+					/>
+					<label htmlFor="priority" className="font-roboto">Want to yo give your order priority?</label>
+				</div>
 
-				<button type="submit">ORDER NOW FOR €--</button>
+
+				<button type="submit" className="buttons order-button font-roboto uppercase">ORDER NOW FOR €{currentTotalPrice.toFixed(2)}</button>
 			</form>
 
 		</div>
