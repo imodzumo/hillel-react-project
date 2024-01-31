@@ -8,10 +8,6 @@ const Cart = ()=> {
 	const items = useSelector(state => state.cart.items);
 	const user = useSelector(state => state.user.user);
 
-	const handelOrderPizzas = ()=> {
-		console.log("order pizzas");
-	}
-
 	return (
 		<div className="cart-container">
 			<div onClick={()=> navigate("/menu")} className="font-roboto back-to-menu-button">
@@ -55,7 +51,7 @@ const Cart = ()=> {
 
 			<div className="cart-buttons-container">
 				<button
-					onClick={handelOrderPizzas}
+					onClick={()=> navigate("/order/new")}
 					className="buttons order-button font-roboto uppercase"
 				>Order pizzas</button>
 				<button

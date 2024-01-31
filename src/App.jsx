@@ -5,7 +5,7 @@ import PageNotFound from "./pages/PageNotFound.jsx";
 import Header from "./components/Header.jsx";
 import Menu from "./pages/Menu.jsx";
 import Cart from "./pages/Cart.jsx";
-import Users from "./pages/Users.jsx";
+import NewOrder from "./pages/NewOrder.jsx";
 
 const App = () => {
 
@@ -16,7 +16,7 @@ const App = () => {
                 <Route path='/' element={<Login />}></Route>
                 <Route path='/menu' element={<Menu />}></Route>
                 <Route path='/cart' element={<Cart />}></Route>
-                <Route path='/users' element={<Users />}></Route>
+                <Route path='/order/new' element={<NewOrder />}></Route>
                 <Route path='*' element={<PageNotFound />}></Route>
             </Routes>
         </div>
