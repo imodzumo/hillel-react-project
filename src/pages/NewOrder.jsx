@@ -4,12 +4,16 @@ import {validationSchema} from "../validationSchema.js";
 import Input from "../components/Input.jsx";
 import {useSelector, useDispatch} from "react-redux";
 import {updateTotalPrice} from "../redux/slices/cartSlice.js";
+import {addOrder, createOrder} from "../redux/slices/orderSlice.js";
+import {useNavigate} from "react-router-dom";
 
 
 const NewOrder = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const user = useSelector(state => state.user.user);
 	const currentTotalPrice = useSelector(state => state.cart.totalPrice);
+	const cartItems = useSelector(state => state.cart.items);
 
 
 	const {handleSubmit, formState: { errors }, control} = useForm({
@@ -29,6 +33,31 @@ const NewOrder = () => {
 
 	const onSubmit = (data) => {
 		console.log(data, currentTotalPrice);
+
+		const updatedCartItems = cartItems.map(item => ({
+			...item,
+			pizzaId: item.id,
+			id: undefined,
+		}));
+
+		const orderData = {
+			address: data.address,
+			customer: data.name,
+			phone: data.phone,
+			priority: data.priority,
+			position: "",
+			cart: updatedCartItems,
+		}
+
+		dispatch(createOrder(orderData))
+			.unwrap()
+			.then((response) => {
+				dispatch(addOrder(response));
+				navigate(`/order/${response.data.id}`);
+			})
+			.catch((error) => {
+				console.error('Order creation failed:', error);
+			});
 	}
 
 	return (
