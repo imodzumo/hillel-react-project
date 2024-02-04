@@ -1,12 +1,14 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getMenuItems} from "../redux/slices/cartSlice.js";
+import {prioritizeOrder} from "../redux/slices/orderSlice.js";
 
 
 const OrderDetails = () => {
 	const dispatch = useDispatch();
 	const {menuItems} = useSelector(state => state.cart)
 	const {isLoading, isError, orderInfo} = useSelector(state => state.order);
+	const [timeDifferenceMessage, setTimeDifferenceMessage] = useState(0);
 
 	useEffect(()=> {
 		dispatch(getMenuItems());
@@ -22,15 +24,33 @@ const OrderDetails = () => {
 		hour12: true
 	}).format(new Date(estimatedDelivery ?? new Date()));
 
-	const timeDifferenceMessage = (() => {
-		const futureTime = new Date(estimatedDelivery ?? new Date());
-		const currentTime = new Date();
-		return Math.max(Math.floor((futureTime - currentTime) / (1000 * 60)), 0);
-	})();
+	useEffect(() => {
+		const updateTimeDifference = () => {
+			const futureTime = new Date(estimatedDelivery ?? new Date());
+			const currentTime = new Date();
+			const timeDifference = Math.max(Math.floor((futureTime - currentTime) / (1000 * 60)), 0);
+			setTimeDifferenceMessage(timeDifference);
+		};
+
+		updateTimeDifference();
+
+		const intervalId = setInterval(updateTimeDifference, 60000);
+
+		return () => clearInterval(intervalId);
+	}, [estimatedDelivery]);
+
 
 	const capitalize = (s) => {
 		if (typeof s !== 'string') return '';
 		return s.charAt(0).toUpperCase() + s.slice(1);
+	}
+
+	const handlePrioritizeOrder = () => {
+		const orderData = {
+			priority: true,
+		};
+		const orderId = orderInfo.data.id;
+		dispatch(prioritizeOrder({orderData, id: orderId}));
 	}
 
 
@@ -78,10 +98,11 @@ const OrderDetails = () => {
 
 				<div className="order-status-price-container main-beige-background font-roboto">
 					<div>Price pizza: €{orderInfo.data.orderPrice.toFixed(2)}</div>
-					<div>Price priority: €{orderInfo.data.priorityPrice.toFixed(2)}</div>
-					<div>to pay on delivery: €{(orderInfo.data.orderPrice + orderInfo.data.priorityPrice).toFixed(2)}</div>
+					{orderInfo.data.priority && <div>Price priority: €{orderInfo.data.priorityPrice.toFixed(2)}</div>}
+					<div>To pay on delivery: €{(orderInfo.data.orderPrice + orderInfo.data.priorityPrice).toFixed(2)}</div>
 				</div>
 
+				{!orderInfo.data.priority && <button onClick={handlePrioritizeOrder} className="buttons prioritize-button font-roboto uppercase">Prioritize</button>}
 			</div>
 		</div>
 	);

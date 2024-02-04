@@ -27,6 +27,27 @@ export const createOrder = createAsyncThunk('order/createOrder', async (orderDat
 	}
 })
 
+export const prioritizeOrder = createAsyncThunk('order/prioritizeOrder', async ({orderData, id}, { rejectWithValue }) => {
+	try {
+		const response = await fetch(`${PIZZA_API}/order/${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(orderData),
+		});
+		if (!response.ok) {
+			throw new Error('Failed to prioritize order');
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Error prioritizing order:', error);
+		return rejectWithValue(error.message);
+	}
+})
+
+
 const orderSlice = createSlice({
 	name: "order",
 	initialState,

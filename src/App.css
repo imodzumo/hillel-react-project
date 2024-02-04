@@ -411,4 +411,15 @@
     color: darkslategrey;
     font-weight: bold;
     border-radius: 10px;
+    margin-bottom: 30px;
+}
+.prioritize-button {
+    color: darkslategrey;
+    font-weight: bold;
+    background-color: #eab308;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    transition: box-shadow 0.3s ease-in-out;
+    justify-self: end;
 }

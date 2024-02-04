@@ -55,8 +55,8 @@ const NewOrder = () => {
 				dispatch(addOrder(response));
 				navigate(`/order/${response.data.id}`);
 			})
-			.catch((error) => {
-				console.error('Order creation failed:', error);
+			.catch(() => {
+				console.error('Something went wrong');
 			});
 	}
 
