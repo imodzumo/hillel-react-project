@@ -266,7 +266,6 @@
 .new-order-container {
     display: grid;
     justify-content: center;
-    /*align-items: center;*/
     grid-template-columns: auto;
     grid-template-rows: auto;
     margin: 0 auto;
@@ -322,4 +321,94 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+
+/*Order details*/
+.order-details-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+.order-details-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.order-details-title {
+    color: darkslategrey;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.order-details-status-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.order-status-menu-wrapper {}
+.order-status-menu-quantity {
+    color: darkslategrey;
+    font-weight: bold;
+    margin: 0;
+}
+.order-status-menu-price {
+    align-self: start;
+    justify-self: end;
+    color: darkslategrey;
+    font-weight: bold;
+}
+.priority-status {
+    padding: 5px 15px;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.order-status {
+    padding: 5px 15px;
+    background-color: #22c55e;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.order-status-delivery-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.order-status-delivery-container-left {
+    color: darkslategrey;
+    font-weight: bold;
+    margin-right: 100px;
+}
+.order-status-delivery-container-estimated {
+    opacity: 0.5;
+}
+.order-status-menu {
+    margin-bottom: 30px;
+    border-top: 1px solid darkgrey;
+}
+.order-status-menu-container {
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid darkgrey;
+}
+.order-status-price-container {
+    padding: 20px;
+    color: darkslategrey;
+    font-weight: bold;
+    border-radius: 10px;
 }
