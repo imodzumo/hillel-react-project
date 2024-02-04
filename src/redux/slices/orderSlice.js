@@ -30,7 +30,7 @@ export const createOrder = createAsyncThunk('order/createOrder', async (orderDat
 export const prioritizeOrder = createAsyncThunk('order/prioritizeOrder', async ({orderData, id}, { rejectWithValue }) => {
 	try {
 		const response = await fetch(`${PIZZA_API}/order/${id}`, {
-			method: 'PUT',
+			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
 			},

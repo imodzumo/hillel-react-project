@@ -47,7 +47,7 @@ const OrderDetails = () => {
 
 	const handlePrioritizeOrder = () => {
 		const orderData = {
-			priority: true,
+			priority: true
 		};
 		const orderId = orderInfo.data.id;
 		dispatch(prioritizeOrder({orderData, id: orderId}));
