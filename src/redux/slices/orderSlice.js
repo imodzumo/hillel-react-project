@@ -39,8 +39,6 @@ export const prioritizeOrder = createAsyncThunk('order/prioritizeOrder', async (
 		if (!response.ok) {
 			throw new Error('Failed to prioritize order');
 		}
-		const data = await response.json();
-		return data;
 	} catch (error) {
 		console.error('Error prioritizing order:', error);
 		return rejectWithValue(error.message);
@@ -54,6 +52,9 @@ const orderSlice = createSlice({
 	reducers: {
 		addOrder: (state, {payload}) => {
 			state.orderInfo = payload;
+		},
+		addPriorityPrice: (state, {payload}) => {
+			state.orderInfo.data.priorityPrice = payload
 		}
 	},
 	extraReducers: (builder)=> {
@@ -69,10 +70,14 @@ const orderSlice = createSlice({
 			state.isLoading = false;
 			state.isError = true;
 		});
+		builder.addCase(prioritizeOrder.fulfilled, (state) => {
+			state.orderInfo.data.priority = true;
+		});
 	}
 })
 
 export const {
 	addOrder,
+	addPriorityPrice,
 } = orderSlice.actions;
 export default orderSlice.reducer;

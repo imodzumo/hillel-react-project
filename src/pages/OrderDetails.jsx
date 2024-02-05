@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {getMenuItems} from "../redux/slices/cartSlice.js";
-import {prioritizeOrder} from "../redux/slices/orderSlice.js";
+import {addPriorityPrice, prioritizeOrder} from "../redux/slices/orderSlice.js";
 
 
 const OrderDetails = () => {
@@ -51,6 +51,9 @@ const OrderDetails = () => {
 		};
 		const orderId = orderInfo.data.id;
 		dispatch(prioritizeOrder({orderData, id: orderId}));
+
+		const priorityPrice = 8;
+		dispatch(addPriorityPrice(priorityPrice));
 	}
 
 
