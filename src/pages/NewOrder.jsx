@@ -1,4 +1,4 @@
-import {useForm, Controller} from "react-hook-form";
+import { useForm, useController } from 'react-hook-form';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {validationSchema} from "../validationSchema.js";
 import Input from "../components/Input.jsx";
@@ -16,7 +16,7 @@ const NewOrder = () => {
 	const cartItems = useSelector(state => state.cart.items);
 
 
-	const {handleSubmit, formState: { errors }, control} = useForm({
+	const {handleSubmit, control} = useForm({
 		defaultValues: {
 			name: user,
 			phone: "+380",
@@ -60,6 +60,24 @@ const NewOrder = () => {
 			});
 	}
 
+	const ControlledInput = ({ name, type, placeholder }) => {
+		const {
+			field,
+			fieldState: { error },
+		} = useController({
+			name,
+			control,
+			defaultValue: type === "checkbox" ? false : "",
+		});
+
+		return <Input
+			{...field}
+			type={type}
+			placeholder={placeholder}
+			error={error?.message}
+		/>;
+	};
+
 	return (
 		<div className="new-order-container">
 			<h2 className="new-order-title font-roboto">Ready to order ? Let`s go!</h2>
@@ -69,43 +87,19 @@ const NewOrder = () => {
 				className="new-order-input-container"
 			>
 				<h4 className="new-order-input-container-title font-roboto">First Name</h4>
-				<Controller
-					name="name"
-					control={control}
-					render={({field, fieldState: {error}}) => <Input {...field} error={error} placeholder="name" type="text"/>}
-				/>
+				<ControlledInput name="name" type="text" placeholder="name"/>
 
 				<h4 className="new-order-input-container-title font-roboto">Phone number</h4>
-				<Controller
-					name="phone"
-					control={control}
-					render={({field, fieldState: {error}}) => <Input {...field} error={error} placeholder="phone" type="text"/>}
-				/>
+				<ControlledInput name="phone" type="text" placeholder="phone"/>
 
 				<h4 className="new-order-input-container-title font-roboto">Address</h4>
-				<Controller
-					name="address"
-					control={control}
-					render={({field, fieldState: {error}}) => <Input {...field} error={error} placeholder="address" type="text"/>}
-				/>
+				<ControlledInput name="address" type="text" placeholder="address"/>
 
 				<div></div>
 				<div className="checkbox-container">
-					<Controller
-						name="priority"
-						control={control}
-						render={({field, fieldState: {error}}) =>
-							<Input
-								{...field}
-								error={error}
-								placeholder="priority"
-								type="checkbox"
-								onChange={(e) => handlePriorityChange(e.target.checked)}
-							/>}
-					/>
+					<ControlledInput name="priority" type="checkbox" placeholder="" onChange={(e) => handlePriorityChange(e.target.checked)}/>
 					<label htmlFor="priority" className="font-roboto">Want to yo give your order priority?</label>
 				</div>
-
 
 				<button type="submit" className="buttons order-button font-roboto uppercase">ORDER NOW FOR €{currentTotalPrice.toFixed(2)}</button>
 			</form>
