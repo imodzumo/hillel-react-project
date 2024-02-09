@@ -423,3 +423,48 @@
     transition: box-shadow 0.3s ease-in-out;
     justify-self: end;
 }
+
+/*Loading*/
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.progressbar{
+    height: 26px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    background: #ffffff;
+    border-radius: 10px;
+    margin: -20px 0 0 -100px;
+    padding: 2px;
+    border: 1px solid lightgrey;
+}
+.loading{
+    transition: all 500ms ease;
+    height: 20px;
+    width: calc(100% - 10px);
+    border-radius: 8px;
+    background: #eab308;
+    position: absolute;
+    margin: 3px;
+    display: inline-block;
+    animation: load 3s ease infinite;
+}
+.load-title{
+    font-weight: bold;
+    text-align: center;
+    margin-top: -30px;
+    color: darkslategrey;
+}
+
+@keyframes load{
+    0%{
+        width: 2%;
+    }
+    10%{
+        width: 10%;
+    }
+}

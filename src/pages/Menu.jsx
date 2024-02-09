@@ -11,7 +11,7 @@ const Menu = ()=> {
 		dispatch(getMenuItems());
 	}, [dispatch])
 
-	if (isLoading) return <div className="menu-container">Loading menu...</div>;
+	// if (isLoading) return <div className="menu-container">Loading menu...</div>;
 	if (isError) return <div className="menu-container">No menu items available.</div>;
 
 	return (
